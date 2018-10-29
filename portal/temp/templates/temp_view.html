@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head lang = 'ja'>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    </head>
+  <body>
+    <h1>{{ date }} の温度と湿度</h1>
+      <div style="width:75%;">
+        <canvas id="myChart"></canvas>
+      </div>
+    <script>
+new Chart(document.getElementById("myChart"), {
+  //type: "doughnut",
+  type: "line",
+  data: {
+    labels: {{ times | safe }}, //["1", "2", "3"],
+    datasets: [
+    {
+        label: '温度[℃]',
+        fill: false,
+        borderColor: "rgba(135,0,0,0.3)",
+        data: {{ temp | safe }}, //[300, 50, 100],
+
+        //yAxisID: 'y-axis-1',
+      },
+      {
+        label: '湿度[%]',
+        fill: false,
+        borderColor: "rgba(25,25,125.3)",
+        data: {{ hum | safe }}, //[200, 400, 300],
+        //yAxisID: 'y-axis-2',
+      }
+    ],
+  }
+});    </script>
+  </body>
+</html>
